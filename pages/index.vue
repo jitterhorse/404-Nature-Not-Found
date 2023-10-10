@@ -1,5 +1,6 @@
 <template>
   <main>
+    <emscher-world />
     <nav>
       <primary-button :absolute-position="['top', 'left']">
         <BackIcon />
