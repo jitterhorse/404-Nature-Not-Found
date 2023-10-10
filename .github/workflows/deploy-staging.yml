@@ -1,0 +1,33 @@
+name: Build and deploy staging
+on: push
+jobs:
+  build:
+    name: Build static Nuxt.js page and deploy to staging server via FTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install lftp
+        run: sudo apt install lftp
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup node (picks up version from volta)
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build static Nuxt.js site
+        run: npx nuxi generate
+      - name: Deploy via SFTP with lftp
+        uses: pressidium/lftp-mirror-action@v1
+        with:
+          host: ngcobalt395.manitu.net
+          port: 23
+          user: ftp200026136
+          pass: ${{ secrets.FTP_PASSWORD }}
+          # lftp settings
+          onlyNewer: true
+          settings: 'sftp:auto-confirm=yes'
+          # Mirror command options
+          localDir: '.output/public'
+          remoteDir: '.'
+          reverse: true
