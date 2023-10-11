@@ -6,15 +6,11 @@
       <icon-button caption="schließen" :click="closeChat"><ant-icon></ant-icon></icon-button>
     </div>
     <div class="chat-messages-container">
-      <div class="chat-message">
-        Text
-      </div>
-      <div class="chat-message">
-        More text
-      </div>
-      <div class="chat-message outgoing">
+      <chat-message :chat-entry="chatData.Intro[0]" />
+      <chat-message :chat-entry="chatData.Intro[1]" />
+      <chat-message outgoing>
         Message from user
-      </div>
+      </chat-message>
     </div>
     <div class="chat-composing-area">
       <textarea></textarea>
@@ -26,6 +22,7 @@
 <script setup lang="ts">
 import AntIcon from '~/assets/svg/ant.svg'
 import SendIcon from '~/assets/svg/send.svg'
+import chatData from '~/assets/data/chat.json'
 
 defineProps<{
   closeChat: () => void
@@ -81,17 +78,6 @@ defineProps<{
   display: flex;
   flex-direction: column;
   gap: var(--padding);
-}
-.chat-message {
-  border-radius: 2px;
-  background-color: var(--pink);
-  color: black;
-  padding: var(--padding);
-  width: 80%;
-}
-.chat-message.outgoing {
-  background-color: var(--yellow);
-  align-self: flex-end;
 }
 .chat-composing-area {
   margin-top: auto;

@@ -1,0 +1,13 @@
+{
+  "name": "404-nature-not-found-data-loader",
+  "dependencies": {
+    "node-xlsx": "^0.23.0",
+    "ts-node": "^10.9.1"
+  },
+  "scripts": {
+    "start": "ts-node convert.ts"
+  },
+  "volta": {
+    "node": "18.18.0"
+  }
+}
