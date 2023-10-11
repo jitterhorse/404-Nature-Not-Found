@@ -1,33 +1,45 @@
 <template>
-  <main>
+  <div>
     <emscher-world />
     <nav>
-      <primary-button :absolute-position="['top', 'left']">
+      <primary-button>
         <BackIcon />
       </primary-button>
       <primary-button :absolute-position="['top', 'right']">
+      <primary-button>
         <ForwardIcon />
       </primary-button>
-      <primary-button :absolute-position="['bottom', 'right']">
+    </nav>
+    <absolute-position vertical="bottom" horizontal="right">
+      <primary-button>
         <ChatIcon />
       </primary-button>
-    </nav>
-  </main>
+    </absolute-position>
+    <main>
+      <!-- pop ups etc -->
+    </main>
+  </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import BackIcon from '~/assets/svg/back.svg'
 import ForwardIcon from '~/assets/svg/forward.svg'
 import ChatIcon from '~/assets/svg/chat.svg'
-
-export default {
-  components: { BackIcon, ForwardIcon, ChatIcon }
-}
 </script>
 
 <style scoped>
 nav {
-  position: relative;
+  position: fixed;
   z-index: 10;
+  top: var(--unit);
+  right: var(--unit);
+  left: var(--unit);
+
+  display: flex;
+  justify-content: space-between;
+}
+main {
+  position: relative;
+  z-index: 1;
 }
 </style>
