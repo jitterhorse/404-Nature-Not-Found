@@ -2,6 +2,7 @@
   <button
     v-if="type === 'button'"
     type="button"
+    @click="click"
   >
     <slot />
     {{ caption }}
@@ -19,7 +20,8 @@
   const props = defineProps<{
     captionPosition?: 'above' | 'below',
     href?: String,
-    caption: String
+    caption: String,
+    click?: () => void
   }>()
   const flexDirection = props.captionPosition === 'above' ? 'column-reverse' : 'column';
   const type = props.href ? 'link' : 'button';

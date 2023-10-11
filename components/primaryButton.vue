@@ -1,5 +1,5 @@
 <template>
-  <button v-if="type === 'button'">
+  <button v-if="type === 'button'" @click="click">
     <slot />
   </button>
   <NuxtLink
@@ -14,6 +14,8 @@
 const props = defineProps<{
   absolutePosition?: [String, String],
   href?: String
+  click?: () => void
+  size?: number
 }>()
 
 const position = props.absolutePosition ? 'fixed' : 'initial'
@@ -23,6 +25,7 @@ const left = props.absolutePosition && props.absolutePosition[1] === 'left' ? 'v
 const right = props.absolutePosition && props.absolutePosition[1] === 'right' ? 'var(--unit)' : 'initial';
 
 const type = props.href ? 'link' : 'button';
+const scalingFactor = props.size || 1;
 </script>
 
 <style scoped>
@@ -31,9 +34,9 @@ button, a {
   background-color: var(--pink);
   color: var(--yellow);
   border: none;
-  width: calc(var(--unit) * 3);
-  height: calc(var(--unit) * 3);
-  border-radius: calc(var(--unit) * 1.5);
+  width: calc(v-bind(scalingFactor) * calc(var(--unit) * 3));
+  height: calc(v-bind(scalingFactor) * calc(var(--unit) * 3));
+  border-radius: calc(v-bind(scalingFactor) * calc(var(--unit) * 1.5));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +45,7 @@ button, a {
 }
 
 /deep/ svg {
-  width: calc(var(--unit) * 2);
-  height: calc(var(--unit) * 2);
+  width: calc(v-bind(scalingFactor) * calc(var(--unit) * 2));
+  height: calc(v-bind(scalingFactor) * calc(var(--unit) * 2));
 }
 </style>

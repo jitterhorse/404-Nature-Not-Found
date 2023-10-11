@@ -5,10 +5,11 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   vertical: 'top' | 'bottom',
   horizontal: 'left' | 'right',
-}>()
+  zIndex?: number | 'initial',
+}>(), { zIndex: 'initial'})
 
 const position = props.orientation ? 'fixed' : 'initial'
 const top = props.vertical === 'top' ? 'var(--unit)' : 'initial';
@@ -24,5 +25,6 @@ div {
   bottom: v-bind('bottom');
   right: v-bind('right');
   left: v-bind('left');
+  z-index: v-bind('zIndex');
 }
 </style>

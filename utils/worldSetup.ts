@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+let shouldRender = true;
+
 export function worldSetup(container) {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -15,15 +17,20 @@ export function worldSetup(container) {
 
     camera.position.z = 5;
 
-    function animate() {
+    window.addEventListener('renderer-status', (event) => {
+        shouldRender = event.detail.targetStatus;
+    })
 
+    function animate() {
         requestAnimationFrame(animate);
+
+        if (!shouldRender) {
+            return;
+        }
 
         cube.rotation.x += 0.01;
         cube.rotation.y += 0.01;
-
         renderer.render(scene, camera);
-
     }
 
     animate();
