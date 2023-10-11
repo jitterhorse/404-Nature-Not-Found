@@ -5,7 +5,7 @@
       <primary-button>
         <BackIcon />
       </primary-button>
-      <primary-button :absolute-position="['top', 'right']">
+      <primary-button href="/info">404</primary-button>
       <primary-button>
         <ForwardIcon />
       </primary-button>
