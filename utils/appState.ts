@@ -1,6 +1,8 @@
 import {ChatEntry, ChatMessage, TransitionType} from "~/data/types";
 import chatData from '~/assets/data/chat.json'
 
+const availableScenes = Object.keys(chatData);
+
 export const newAutomaticMessage = () => {
     if (!appState.chatPointer) {
         console.warn('New automatic message requested, but chat pointer is empty – silently skipping.');
@@ -33,6 +35,14 @@ export const newAutomaticMessage = () => {
     if (!appState.isChatOpen) {
         appState.unreadMessages += 1
     }
+}
+
+export const goScene = (direction: 1 | -1) => {
+    const currentSceneIndex = availableScenes.indexOf(appState.scene)
+    const nextSceneIndex = (currentSceneIndex + availableScenes.length + direction) % availableScenes.length
+    appState.scene = availableScenes[nextSceneIndex]
+
+    window.dispatchEvent(new CustomEvent('change-scene', {detail: {targetScene: appState.scene}}))
 }
 
 const luckyNumbers = {}

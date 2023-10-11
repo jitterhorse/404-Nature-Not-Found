@@ -1,8 +1,22 @@
 import * as THREE from 'three';
 
+const SCENE_COLORS: {[sceneName: string]: number} = {
+    Intro: 0x00ff00,
+    Begriffe: 0x00ffff,
+    Pferde: 0x0000ff,
+    Rezepte: 0xff00ff,
+    Emscher: 0xff0000,
+    Autos: 0xffff00,
+    Beschwerde: 0xff8888,
+    Strahlwirkung: 0xff88ff,
+    Fiktion: 0x88ffff,
+    Cholera: 0x00ff88,
+}
+
+let currentScene = 'Intro';
 let shouldRender = true;
 
-export function worldSetup(container) {
+export function worldSetup(container: HTMLElement) {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -20,6 +34,9 @@ export function worldSetup(container) {
     window.addEventListener('renderer-status', (event) => {
         shouldRender = event.detail.targetStatus;
     })
+    window.addEventListener('change-scene', (event) => {
+        currentScene = event.detail.targetScene;
+    })
 
     function animate() {
         requestAnimationFrame(animate);
@@ -30,6 +47,7 @@ export function worldSetup(container) {
 
         cube.rotation.x += 0.01;
         cube.rotation.y += 0.01;
+        cube.material.color.setHex(SCENE_COLORS[currentScene]);
         renderer.render(scene, camera);
     }
 

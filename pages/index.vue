@@ -2,11 +2,11 @@
   <div>
     <emscher-world />
     <nav>
-      <primary-button>
+      <primary-button :click="() => goScene(-1)">
         <BackIcon />
       </primary-button>
       <primary-button href="/info">404</primary-button>
-      <primary-button>
+      <primary-button :click="() => goScene(+1)">
         <ForwardIcon />
       </primary-button>
     </nav>
