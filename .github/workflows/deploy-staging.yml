@@ -13,7 +13,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json'
-      - name: Install dependencies
+      - name: Install data pipeline dependencies
+        working-directory: data
+        run: npm ci
+      - name: Run data pipeline
+        working-directory: data
+        run: npm run start
+      - name: Install root (Nuxt.js) dependencies
         run: npm ci
       - name: Build static Nuxt.js site
         run: npx nuxi generate
