@@ -3,11 +3,22 @@ export enum TransitionType {
     RANDOM = 'RANDOM'
 }
 
-export interface ChatEntry {
-    message?: string
+export enum ChatMessageDirection {
+    INCOMING = 'INCOMING',
+    OUTGOING = 'OUTGOING'
+}
+
+export interface ChatMessage {
+    id: string
+    text?: string
     comment?: string
     mediaFile?: string
     mediaType?: 'image' | 'video'
+    direction: ChatMessageDirection
+}
+
+export interface ChatEntry {
+    message: ChatMessage
     transitionType: TransitionType
     isLuckyContent: boolean
 }

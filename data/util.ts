@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from "fs";
 import crypto from 'crypto';
-import {ChatEntry, TransitionType} from "./types";
+import {ChatEntry, ChatMessageDirection, TransitionType} from "./types";
 
 const MESSAGE_COLUMN = 0;
 const COMMENT_COLUMN = 1;
@@ -30,22 +30,28 @@ const transferMediaFile = (originalFileName: string): string => {
     return internalFileName
 }
 
+const randomId = (): string => (Math.random() + 1).toString(36).substring(2, 5)
+
 export const parseRow = (row): ChatEntry => {
     let chatEntry: ChatEntry = {
-        message: row[MESSAGE_COLUMN],
-        comment: row[COMMENT_COLUMN],
+        message: {
+            id: randomId(),
+            text: row[MESSAGE_COLUMN],
+            comment: row[COMMENT_COLUMN],
+            direction: ChatMessageDirection.INCOMING
+        },
         transitionType: row[TRANSITION_TYPE_COLUMN] === 0 ? TransitionType.LINEAR : TransitionType.RANDOM,
-        isLuckyContent: row[LUCKY_CONTENT_COLUMN] === 1
+        isLuckyContent: row[LUCKY_CONTENT_COLUMN] === 1,
     }
 
     if (row[MEDIA_FILE_COLUMN]) {
-        chatEntry.mediaFile = transferMediaFile(row[MEDIA_FILE_COLUMN]);
-        if (isExtensionType(chatEntry.mediaFile, IMAGE_EXTENSIONS)) {
-            chatEntry.mediaType = 'image';
-        } else if (isExtensionType(chatEntry.mediaFile, VIDEO_EXTENSIONS)) {
-            chatEntry.mediaType = 'video';
+        chatEntry.message.mediaFile = transferMediaFile(row[MEDIA_FILE_COLUMN]);
+        if (isExtensionType(chatEntry.message.mediaFile, IMAGE_EXTENSIONS)) {
+            chatEntry.message.mediaType = 'image';
+        } else if (isExtensionType(chatEntry.message.mediaFile, VIDEO_EXTENSIONS)) {
+            chatEntry.message.mediaType = 'video';
         } else {
-            console.error(`Unknown media file type: ${chatEntry.mediaFile}`)
+            console.error(`Unknown media file type: ${chatEntry.message.mediaFile}`)
             process.exit(1)
         }
     }

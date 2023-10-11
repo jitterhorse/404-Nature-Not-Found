@@ -5,28 +5,42 @@
       <h2>Chat</h2>
       <icon-button caption="schließen" :click="closeChat"><ant-icon></ant-icon></icon-button>
     </div>
-    <div class="chat-messages-container">
-      <chat-message :chat-entry="chatData.Intro[0]" />
-      <chat-message :chat-entry="chatData.Intro[1]" />
-      <chat-message outgoing>
-        Message from user
-      </chat-message>
+    <div ref="messagesContainer" class="chat-messages-container">
+      <chat-message :message="message" v-for="message in appState.messages" :key="message.id" />
     </div>
-    <div class="chat-composing-area">
-      <textarea></textarea>
-      <primary-button :size="0.5"><send-icon /></primary-button>
-    </div>
+    <form class="chat-composing-area" @submit.prevent="submitMessage">
+      <textarea ref="textInput" @keyup.enter.prevent="(event) => event.target.parentNode.requestSubmit()"></textarea>
+      <primary-button :size="0.5" type="submit"><send-icon /></primary-button>
+    </form>
   </div>
 </template>
 
 <script setup lang="ts">
 import AntIcon from '~/assets/svg/ant.svg'
 import SendIcon from '~/assets/svg/send.svg'
-import chatData from '~/assets/data/chat.json'
+import {ChatMessageDirection} from "~/data/types";
+
+const textInput = ref(null)
+const messagesContainer = ref(null)
 
 defineProps<{
   closeChat: () => void
 }>()
+
+const submitMessage = () => {
+  appState.messages.push({
+    id: `user-${appState.messages.length}`,
+    text:  textInput.value.value,
+    direction: ChatMessageDirection.OUTGOING
+  })
+  textInput.value.value = ''
+}
+
+watch(appState.messages, () => {
+  setTimeout(() => {
+    messagesContainer.value.scrollTo(0, messagesContainer.value.scrollHeight)
+  }, 10)
+})
 </script>
 
 <style scoped>
@@ -78,6 +92,9 @@ defineProps<{
   display: flex;
   flex-direction: column;
   gap: var(--padding);
+  padding-bottom: var(--padding);
+
+  overflow-y: auto;
 }
 .chat-composing-area {
   margin-top: auto;

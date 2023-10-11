@@ -11,12 +11,15 @@
       </primary-button>
     </nav>
     <absolute-position vertical="bottom" horizontal="right" z-index="21">
-      <primary-button :click="() => isChatOpen = !isChatOpen">
-        <close-icon v-if="isChatOpen" />
+      <primary-button :click="() => appState.isChatOpen = !appState.isChatOpen">
+        <ClientOnly>
+          <badge-count :count="appState.unreadMessages" />
+        </ClientOnly>
+        <close-icon v-if="appState.isChatOpen" />
         <chat-icon v-else />
       </primary-button>
     </absolute-position>
-    <chat v-if="isChatOpen" :close-chat="() => isChatOpen = false"></chat>
+    <chat v-if="appState.isChatOpen" :close-chat="() => appState.isChatOpen = false"></chat>
     <main>
       <!-- pop ups etc -->
     </main>
@@ -29,10 +32,17 @@ import ForwardIcon from '~/assets/svg/forward.svg'
 import ChatIcon from '~/assets/svg/chat.svg'
 import CloseIcon from '~/assets/svg/close.svg'
 
-const isChatOpen = ref(false)
-watch(isChatOpen, () => {
-  window.dispatchEvent(new CustomEvent('renderer-status', { detail: { targetStatus: !isChatOpen.value}}))
-})
+watch(
+    () => appState.isChatOpen,
+    () => {
+      if (appState.isChatOpen) {
+        appState.unreadMessages = 0;
+      }
+      window.dispatchEvent(new CustomEvent('renderer-status', {detail: {targetStatus: !appState.isChatOpen}}))
+    }
+)
+
+setInterval(() => newAutomaticMessage(), 3000)
 </script>
 
 <style scoped>

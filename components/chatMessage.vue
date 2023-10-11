@@ -1,18 +1,17 @@
 <template>
-  <div class="chat-message" :class="{ outgoing }">
-    <img :src="'/media/' + chatEntry?.mediaFile" v-if="chatEntry && chatEntry.mediaType === 'image'" alt="" />
-    {{ chatEntry?.message }}
+  <div class="chat-message" :class="{ outgoing: message.direction === ChatMessageDirection.OUTGOING }">
+    <img :src="'/media/' + message.mediaFile" v-if="message.mediaType === 'image'" alt="" />
+    {{ message.text }}
     <small>
-      {{ chatEntry?.comment }}
+      {{ message.comment }}
     </small>
-    <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import {ChatEntry} from "~/data/types";
+import {ChatMessage, ChatMessageDirection} from "~/data/types";
 
-defineProps<{chatEntry?: ChatEntry, outgoing?: boolean}>()
+defineProps<{message: ChatMessage}>()
 </script>
 
 <style>
@@ -22,6 +21,8 @@ defineProps<{chatEntry?: ChatEntry, outgoing?: boolean}>()
   color: black;
   padding: var(--padding);
   width: 80%;
+
+  word-break: break-word;
 }
 .chat-message.outgoing {
   background-color: var(--yellow);
