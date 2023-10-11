@@ -1,5 +1,38 @@
+@font-face {
+    font-family: 'Eau Douce Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('~/assets/fonts/eau_douce_sans_light.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Eau Douce Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('~/assets/fonts/eau_douce_sans_bold.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Bernard MT Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: url('~/assets/fonts/bernard_mt_condensed_regular.woff2') format('woff2');
+}
+
 html {
     --pink: #FF06FF;
     --yellow: #FFEF00;
     --unit: 24px;
+
+    --body-font: 'Eau Douce Sans';
+    --header-font: 'Bernard MT Condensed';
+
+    min-height: 100vh;
+    background-color: black;
+}
+body {
+    font-family: var(--body-font);
+    color: white;
+}
+h1, h2, h3 {
+    font-family: var(--header-font);
+    color: var(--pink);
 }
