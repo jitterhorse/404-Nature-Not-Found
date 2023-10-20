@@ -42,7 +42,9 @@ watch(
     }
 )
 
-setInterval(() => newAutomaticMessage(), 3000)
+if (process.client) {
+  setInterval(() => newAutomaticMessage(), 3000)
+}
 </script>
 
 <style scoped>
