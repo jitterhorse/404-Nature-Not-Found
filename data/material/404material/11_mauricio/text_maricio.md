@@ -1,0 +1,1 @@
+Den Emscher erlebe ich gerne durch das Radfahren. Jenseits von schön oder hässlich ist die Emscher für mich einfach einzigartig. Lärm, Gerüche, Plattenbauten, Altbausiedlungen, Grün, Natur, Industrie, Kunst, Kreatives, Bewegung, Vergangenheit und Gegenwart.. ein Fluss, der im ersten Blick trennt, in dessen Umgebung aber die Pottelemente spürbar zusammenfließen.
