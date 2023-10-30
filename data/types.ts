@@ -5,7 +5,8 @@ export enum TransitionType {
 
 export enum ChatMessageDirection {
     INCOMING = 'INCOMING',
-    OUTGOING = 'OUTGOING'
+    OUTGOING = 'OUTGOING',
+    SYSTEM = 'SYSTEM'
 }
 
 export interface ChatMessage {

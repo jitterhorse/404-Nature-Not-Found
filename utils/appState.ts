@@ -1,42 +1,12 @@
-import {ChatEntry, ChatMessage, TransitionType} from "~/data/types";
+import { ChatMessage } from "~/data/types";
 import chatData from '~/assets/data/chat.json'
-import { Mesh, Object3D, SkinnedMesh, Vector3 } from "three";
+import { Mesh, Vector3 } from "three";
+import { chatHandleSceneChange } from "~/utils/chatLogic";
 
-const availableScenes = Object.keys(chatData);
+type SceneName = keyof typeof chatData;
 
-export const newAutomaticMessage = () => {
-    if (!appState.chatPointer) {
-        console.warn('New automatic message requested, but chat pointer is empty – silently skipping.');
-        return;
-    }
+const availableScenes = Object.keys(chatData) as Array<SceneName>;
 
-    const entry: ChatEntry = chatData[appState.scene][appState.chatPointer.index]
-    appState.messages.push(entry.message)
-
-    if (entry.transitionType === TransitionType.LINEAR) {
-        if (appState.chatPointer.index >= chatData[appState.scene].length - 1) {
-            appState.chatPointer = undefined
-        } else {
-            appState.chatPointer.index += 1
-        }
-    } else if (entry.transitionType === TransitionType.RANDOM) {
-        const luckyNumbers = appState.luckyNumbers[appState.scene]
-
-        if (luckyNumbers.length === 0) {
-            appState.chatPointer = undefined
-        } else {
-            const luckyIndex = luckyNumbers[Math.floor(Math.random() * luckyNumbers.length)]
-            appState.luckyNumbers[appState.scene] = luckyNumbers.filter(luckyNumber => luckyNumber !== luckyIndex)
-            appState.chatPointer.index = luckyIndex
-        }
-    } else {
-        console.error('Unknown transition type: ' + entry.transitionType)
-    }
-
-    if (!appState.isChatOpen) {
-        appState.unreadMessages += 1
-    }
-}
 
 export const goScene = (direction: 1 | -1) => {
     const currentSceneIndex = availableScenes.indexOf(appState.scene)
@@ -44,10 +14,11 @@ export const goScene = (direction: 1 | -1) => {
     appState.scene = availableScenes[nextSceneIndex]
         
     window.dispatchEvent(new CustomEvent('change-scene', {detail: {targetScene: appState.scene, targetNumber: nextSceneIndex}}))
+    chatHandleSceneChange(availableScenes[currentSceneIndex]);
 }
 
 export const addScene = (content : Array<any>) => {
-    var es = {} as EMSCHER_SCENE; 
+    const es = {} as EMSCHER_SCENE;
     es.cam_pos = new Vector3();
     es.cam_pov = new Vector3();
     es.cam_fov = 0;
@@ -66,7 +37,6 @@ export const addScene = (content : Array<any>) => {
         }
         else{
             es.objs.push(elem);
-            //console.log(elem);
         }
     }
     )
@@ -75,39 +45,39 @@ export const addScene = (content : Array<any>) => {
 
 }
 
-export const start404Event = () => {
-    if(new Date().getTime() - appState.last404EventTime >= 2000){
-        if(Math.random() > 0.0){
-            appState.event404 = true;
-            appState.last404EventTime = new Date().getTime();
-        } 
-    }    
-}
-
-const luckyNumbers = {}
+type LuckyNumbersPerScene = {[sceneName in SceneName]: Array<number>}
+const _luckyNumbers: any = {}
 Object.entries(chatData).forEach(([sceneName, entries]) => {
-    luckyNumbers[sceneName] = entries
+    _luckyNumbers[sceneName] = entries
         .map(({ isLuckyContent }, entryIndex) => ({ isLuckyContent, entryIndex}))
         .filter(({ isLuckyContent }) => isLuckyContent)
         .map(({ entryIndex }) => entryIndex)
 })
+const luckyNumbers = _luckyNumbers as LuckyNumbersPerScene;
+
+type ChatPointerPerScene = { [sceneName in SceneName]: number | undefined }
+const _chatPointers: any = {}
+Object.keys(chatData).forEach((sceneName) => {
+    _chatPointers[sceneName] = 0
+})
+const chatPointers = _chatPointers as ChatPointerPerScene;
 
 interface EMSCHER_SCENE { 
-    cam_pos: THREE.Vector3,
-    cam_pov: THREE.Vector3,
+    cam_pos: Vector3,
+    cam_pov: Vector3,
     cam_fov: number,
     objs: Array<any> 
-};
+}
 
 interface AppState {
     isChatOpen: boolean,
-    event404: boolean,
-    last404EventTime: number,
+    isSimulateTyping: boolean,
+    autoChat: undefined | ReturnType<typeof setTimeout>
     unreadMessages: number,
     messages: Array<ChatMessage>,
-    scene: string,
-    chatPointer?: { index: number },
-    luckyNumbers: {[sceneName: string]: Array<number>},
+    scene: SceneName,
+    chatPointers: ChatPointerPerScene,
+    luckyNumbers: LuckyNumbersPerScene,
     tween_time: number,
     rocks: Array<Mesh>,
     scenes: Array<EMSCHER_SCENE>
@@ -115,14 +85,12 @@ interface AppState {
 
 export const appState: AppState = reactive({
     isChatOpen: false,
-    event404: false,
-    last404EventTime: 0,
+    isSimulateTyping: false,
+    autoChat: undefined,
     unreadMessages: 0,
     messages: [],
     scene: 'Intro',
-    chatPointer: {
-        index: 0
-    },
+    chatPointers,
     luckyNumbers,
     tween_time: 1000,
     rocks: [],

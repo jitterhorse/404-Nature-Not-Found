@@ -50,7 +50,7 @@ watch(
 )
 
 if (process.client) {
-  setInterval(() => newAutomaticMessage(), 3000)
+  startAutoChat()
 
   appState.last404EventTime = new Date().getTime();
   setInterval(() => start404Event(), 5000)

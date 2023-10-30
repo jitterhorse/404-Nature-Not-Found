@@ -1,16 +1,44 @@
 <template>
-  <div class="chat-backdrop"></div>
+  <div class="chat-backdrop" />
   <div class="chat-container">
     <div class="chat-navbar">
       <h2>Chat</h2>
-      <icon-button caption="schließen" :click="closeChat"><ant-icon></ant-icon></icon-button>
+      <icon-button
+        caption="schließen"
+        :click="closeChat"
+      >
+        <ant-icon />
+      </icon-button>
     </div>
-    <div ref="messagesContainer" class="chat-messages-container">
-      <chat-message :message="message" v-for="message in appState.messages" :key="message.id" />
+    <div
+      ref="messagesContainer"
+      class="chat-messages-container"
+    >
+      <chat-message
+        v-for="message in appState.messages"
+        :key="message.id"
+        :message="message"
+      />
+      <chat-message
+        v-if="appState.isSimulateTyping"
+        key="typing"
+        :message="{id: 'typing', mediaType: 'image', mediaFile: TypingAnimation, direction: ChatMessageDirection.INCOMING}"
+      />
     </div>
-    <form class="chat-composing-area" @submit.prevent="submitMessage">
-      <textarea ref="textInput" @keyup.enter.prevent="(event) => event.target.parentNode.requestSubmit()"></textarea>
-      <primary-button :size="0.5" type="submit"><send-icon /></primary-button>
+    <form
+      class="chat-composing-area"
+      @submit.prevent="submitMessage"
+    >
+      <textarea
+        ref="textInput"
+        @keyup.enter.prevent="(event) => event.target.parentNode.requestSubmit()"
+      />
+      <primary-button
+        :size="0.5"
+        type="submit"
+      >
+        <send-icon />
+      </primary-button>
     </form>
   </div>
 </template>
@@ -18,26 +46,33 @@
 <script setup lang="ts">
 import AntIcon from '~/assets/svg/ant.svg'
 import SendIcon from '~/assets/svg/send.svg'
+import TypingAnimation from "~/assets/svg/typing.svg?url"
 import {ChatMessageDirection} from "~/data/types";
+import {insertUserMessage} from "~/utils/chatLogic";
 
-const textInput = ref(null)
-const messagesContainer = ref(null)
+const textInput = ref<HTMLInputElement | null>(null)
+const messagesContainer = ref<HTMLElement | null>(null)
 
 defineProps<{
   closeChat: () => void
 }>()
 
 const submitMessage = () => {
-  appState.messages.push({
-    id: `user-${appState.messages.length}`,
-    text:  textInput.value.value,
-    direction: ChatMessageDirection.OUTGOING
-  })
+  if (!textInput.value) {
+    return;
+  }
+  const messageText = textInput.value.value
+  if (messageText.trim().length) {
+    insertUserMessage(messageText);
+  }
   textInput.value.value = ''
 }
 
-watch(appState.messages, () => {
+watch([() => appState.isSimulateTyping, appState.messages], () => {
   setTimeout(() => {
+    if (!messagesContainer.value) {
+      return;
+    }
     messagesContainer.value.scrollTo(0, messagesContainer.value.scrollHeight)
   }, 10)
 })

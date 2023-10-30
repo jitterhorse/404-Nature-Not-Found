@@ -1,7 +1,9 @@
 import path from 'path';
 import fs from "fs";
 import crypto from 'crypto';
+import { marked } from "marked";
 import {ChatEntry, ChatMessageDirection, TransitionType} from "./types";
+import {RendererObject} from "MarkedOptions";
 
 const MESSAGE_COLUMN = 0;
 const COMMENT_COLUMN = 1;
@@ -32,12 +34,28 @@ const transferMediaFile = (originalFileName: string): string => {
 
 const randomId = (): string => (Math.random() + 1).toString(36).substring(2, 5)
 
-export const parseRow = (row): ChatEntry => {
-    let chatEntry: ChatEntry = {
+const renderCustomMarkdown = (markdown: string): string => {
+    return marked(markdown
+    )
+}
+
+const renderer: RendererObject = {
+    codespan(text) {
+        return `<mark class="chat-mark-yellow">${text}</mark>`;
+    },
+    del(text) {
+        return `<mark class="chat-mark-pink">${text}</mark>`;
+    }
+};
+
+marked.use({ renderer });
+
+export const parseRow = (row: Array<string | number>): ChatEntry => {
+    const chatEntry: ChatEntry = {
         message: {
             id: randomId(),
-            text: row[MESSAGE_COLUMN],
-            comment: row[COMMENT_COLUMN],
+            text: row[MESSAGE_COLUMN] ? renderCustomMarkdown(row[MESSAGE_COLUMN] as string) : undefined,
+            comment: row[COMMENT_COLUMN] as string,
             direction: ChatMessageDirection.INCOMING
         },
         transitionType: row[TRANSITION_TYPE_COLUMN] === 0 ? TransitionType.LINEAR : TransitionType.RANDOM,
@@ -45,7 +63,7 @@ export const parseRow = (row): ChatEntry => {
     }
 
     if (row[MEDIA_FILE_COLUMN]) {
-        chatEntry.message.mediaFile = transferMediaFile(row[MEDIA_FILE_COLUMN]);
+        chatEntry.message.mediaFile = transferMediaFile(row[MEDIA_FILE_COLUMN] as string);
         if (isExtensionType(chatEntry.message.mediaFile, IMAGE_EXTENSIONS)) {
             chatEntry.message.mediaType = 'image';
         } else if (isExtensionType(chatEntry.message.mediaFile, VIDEO_EXTENSIONS)) {
