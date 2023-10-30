@@ -42,6 +42,7 @@ watch(
       window.dispatchEvent(new CustomEvent('renderer-status', {detail: {targetStatus: !appState.isChatOpen}}))
     }
 )
+
 watch(
     () => appState.event404,
     () => {
@@ -51,9 +52,7 @@ watch(
 
 if (process.client) {
   startAutoChat()
-
-  appState.last404EventTime = new Date().getTime();
-  setInterval(() => start404Event(), 5000)
+  startAuto404()
 }
 
 </script>

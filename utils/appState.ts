@@ -1,4 +1,4 @@
-import { ChatMessage } from "~/data/types";
+import { ChatMessage, notFoundPage } from "~/data/types";
 import chatData from '~/assets/data/chat.json'
 import { Mesh, Vector3 } from "three";
 import { chatHandleSceneChange } from "~/utils/chatLogic";
@@ -6,7 +6,6 @@ import { chatHandleSceneChange } from "~/utils/chatLogic";
 type SceneName = keyof typeof chatData;
 
 const availableScenes = Object.keys(chatData) as Array<SceneName>;
-
 
 export const goScene = (direction: 1 | -1) => {
     const currentSceneIndex = availableScenes.indexOf(appState.scene)
@@ -72,7 +71,8 @@ interface EMSCHER_SCENE {
 interface AppState {
     isChatOpen: boolean,
     isSimulateTyping: boolean,
-    autoChat: undefined | ReturnType<typeof setTimeout>
+    autoChat: undefined | ReturnType<typeof setTimeout>,
+    auto404: undefined | ReturnType<typeof setTimeout>,
     unreadMessages: number,
     messages: Array<ChatMessage>,
     scene: SceneName,
@@ -80,13 +80,18 @@ interface AppState {
     luckyNumbers: LuckyNumbersPerScene,
     tween_time: number,
     rocks: Array<Mesh>,
-    scenes: Array<EMSCHER_SCENE>
+    scenes: Array<EMSCHER_SCENE>,
+    pages404: Array<notFoundPage>,
+    notFoundBag: Array<number>,
+    last404EventTime: number,
+    event404: boolean
 }
 
 export const appState: AppState = reactive({
     isChatOpen: false,
     isSimulateTyping: false,
     autoChat: undefined,
+    auto404: undefined,
     unreadMessages: 0,
     messages: [],
     scene: 'Intro',
@@ -94,6 +99,10 @@ export const appState: AppState = reactive({
     luckyNumbers,
     tween_time: 1000,
     rocks: [],
-    scenes: []
+    scenes: [],
+    pages404: [],
+    notFoundBag: [],
+    last404EventTime: 0,
+    event404: false
 })
 
