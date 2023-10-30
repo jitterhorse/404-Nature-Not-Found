@@ -38,3 +38,14 @@ h1, h2, h3 {
     font-family: var(--header-font);
     color: var(--pink);
 }
+
+.infoimage{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.infocaption{
+    font-size: 90%;
+    font-style: italic;
+}

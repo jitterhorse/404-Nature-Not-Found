@@ -1,14 +1,36 @@
 <template>
   <info-layout>
+    <h1>404 - Natur nicht gefunden</h1>
+    <h1>404 - Nature not found</h1>
+    <p>ein digitales, partizipatives Kunstwerk von Daniel Hengst</p>
     <p>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-      kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-      sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-      sanctus est Lorem ipsum dolor sit amet.
+      Creative Technologist & Frontend Programmierung Online-Kunstwerk: Clemens Schöll
+      Technische Unterstützung + Programmierung Formular für Online-Partizipation: Magnus Brühl
+      Mitarbeit Öffentlichkeitsarbeit und Projektplanung: Sabrina Borowski & Simon Schlenke
+      Fotodokumentation und organisatorische Unterstützung: Roman Pilgrim & Matthias Krentzek
     </p>
-    <h1>(credits)</h1>
+    <p>
+      Archivmaterial aus dem Stiftung Ruhr Museum Essen, Stadtarchiv Essen, Stadtarchiv Dortmund
+    </p>
+    <p>
+      Das Projekt wurde finanziell unterstützt durch die Stadt Essen. Danke an das Team vom Kulturamt Essen
+    </p>
+    <p>
+      PopUp-Ausstellungen bei kunstwerden e.V. in Essen, Werden und im MXR Lab in Gelsenkirchen
+    </p>
+    <p>
+      Dank an mxr storytelling, Petra Steinhardt & dem Team von kunstwerden e.V., Claudia Kauertz, Gabriele Aschöwer, Peter Schwiderowski, Matthias Hower, Thomas Dupke, Mechthild Semrau, Sabrina Becker und Mathilde Heitmann-Taillefer
+    </p>
+    <div class="spacer">
+
+    </div>
+    <p>
+      Kontakt:
+      studio@danielhengst.de
+    </p>
+    <NuxtLink to="https://danielhengst.de/" target="_blank">
+      > zur Website von Daniel Hengst
+    </NuxtLink>
   </info-layout>
 </template>
 <script setup lang="ts">

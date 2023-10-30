@@ -1,29 +1,38 @@
 <template>
   <info-layout>
+    <h1>404 - Natur nicht gefunden</h1>
+    <h1>404 - Nature not found</h1>
+
+    <img class="infoimage" :src=image1>
+    <figcaption class="infocaption">Darstellungen von Bäumen auf Landkarten im Verlauf der Jahrhunderte</figcaption>
+
+
     <p>
-      Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
-      texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small
-      river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic
-      country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control
-      about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name
-      of Lorem Ipsum decided to leave for the far World of Grammar.
+      Welche Natur finden wir vor, wenn wir uns in Regionen bewegen, in denen Natur (im Sinne von "was nicht vom Menschen geschaffen wurde") schon verändert, zerstört, verdrängt und ausgetauscht wurde? 
     </p>
-    <h1>(info)</h1>
     <p>
-      The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and
-      devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the
-      belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view
-      back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own
-      road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way. On her way she
-      met a copy.
+      Auch die akkurateste und penibelste Analyse des Wortes 'Natur' und des damit verbundenen und dahinter liegenden begrifflichen Konzeptes, wird nicht darüber hinwegtäuschen können, dass alle nichtmenschlichen Lebewesen um uns herum, durch uns Menschen, in enormer Bedrängnis sind.  Über Jahrhunderte hinweg waren wir Menschen scheinbar blind und sehr stark auf uns selbst und unsere eigenen Bedürfnisse fokussiert. Wir haben verlernt / vergessen, dass wir nicht alleine auf der Erde sind. 
     </p>
+    <p>
+      Doch wie gelingt eine Neuaufteilung der uns umgebenden, oft verbauten und versiegelten Flächen? Wie können Flüsse, Moore, Wälder oder Wiesen wieder für andere Spezies attraktiv und nutzbar werden und wie wird sich unser Denken und Wahrnehmen auf diesem Weg verändern?
+      Durch die Linse eines bewusst übertriebenen und unrealistischen Dualismus zwischen Kultur und Natur versucht dieses Kunstwerk Aspekte dieses Wandels sicht- und erfahrbar zu machen. 
+    </p>
+    <p>
+      Als konkreter Recherchegegenstand diente die im Ruhrgebiet liegende Emscherregion (v.a. um Essen und Gelsenkirchen) sowie die im Zusammenhang mit dem Fluss Emscher getätigten Renaturierungsmaßnahmen seit den 1990er Jahren. Dieses "Generationenprojekt" (Bezeichnung der für die Renaturierung verantwortlichen Emschergenossenschaft) ist ein Projekt der Superlative: der dreckigste Fluss der Welt, wird durch die teuerste Renaturierungsmaßnahme der Welt (~5,5 Milliarden €) zum weltweiten Vorzeigeprojekt für andere ähnliche Projekte. Hier wurde ausprobiert und umgesetzt, was vielen anderen ehemaligen und heute zerstörten Naturräumen hoffentlich noch bevorsteht. 
+    </p>
+    <p>
+      Wie nähern wir uns also dieser neuen 'Natur' und welche Empfindungen und welches Verständnis lösen diese simulierten Naturräume in uns aus? 
+    </p>
+    
   </info-layout>
 </template>
 
 <script setup lang="ts">
 import {useSimplifiedSeo} from "~/utils/seo";
+import image1 from "./assets/img/404_nature_icons.jpg";
 
 useSimplifiedSeo({
   title: '404 - Natur nicht gefunden / Nature not found || Einleitung & Informationen zum Projekt'
 })
 </script>
+
