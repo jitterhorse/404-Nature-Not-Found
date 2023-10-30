@@ -1,5 +1,6 @@
 <template>
   <div>
+    <initial-overlay404 :end="introEnded" />
     <emscher-world />
     <nav>
       <primary-button :click="() => goScene(-1)">
@@ -65,11 +66,10 @@ watch(
     }
 )
 
-if (process.client) {
+const introEnded = () => {
   startAutoChat()
   startAuto404()
 }
-
 </script>
 
 <style scoped>

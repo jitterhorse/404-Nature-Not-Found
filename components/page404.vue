@@ -120,13 +120,7 @@ const scrollDown = () => {
 
 <style scoped>
 .overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
   background-color: black;
-  z-index: 30;
   overflow-y: auto;
 }
 .wrapper-header-404 {

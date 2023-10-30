@@ -13,3 +13,5 @@ export const shuffle = <T>(array: Array<T>): Array<T> => {
 
     return array
 }
+export const randomEntry = <T>(array: Array<T>): T => array[Math.floor(Math.random() * array.length)]
+export const sleep = (milliseconds: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, milliseconds))

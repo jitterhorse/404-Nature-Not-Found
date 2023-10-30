@@ -2,12 +2,10 @@ import chatData from "assets/data/chat.json";
 import responsesData from "assets/data/responses.json";
 import {ChatEntry, ChatMessageDirection, TransitionType} from "~/data/types";
 import {appState} from "~/utils/appState";
+import {randomEntry, sleep} from "~/utils/misc";
 
 const CHAT_FREQUENCY = [3000, 10000]
 const CHAT_STOP = "STOP";
-
-const randomEntry = <T>(array: Array<T>): T => array[ Math.floor(Math.random() * array.length)]
-const sleep = (milliseconds: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, milliseconds))
 
 const _newAutomaticMessage = async (): Promise<string | undefined> => {
     const chatPointer = appState.chatPointers[appState.scene]
