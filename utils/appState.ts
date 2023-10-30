@@ -1,6 +1,7 @@
 import { ChatMessage } from "~/data/types";
 import chatData from '~/assets/data/chat.json'
 import { Mesh, Vector3 } from "three";
+import { chatHandleSceneChange } from "~/utils/chatLogic";
 
 type SceneName = keyof typeof chatData;
 
@@ -13,6 +14,7 @@ export const goScene = (direction: 1 | -1) => {
     appState.scene = availableScenes[nextSceneIndex]
         
     window.dispatchEvent(new CustomEvent('change-scene', {detail: {targetScene: appState.scene, targetNumber: nextSceneIndex}}))
+    chatHandleSceneChange(availableScenes[currentSceneIndex]);
 }
 
 export const addScene = (content : Array<any>) => {
@@ -35,7 +37,6 @@ export const addScene = (content : Array<any>) => {
         }
         else{
             es.objs.push(elem);
-            console.log(elem);
         }
     }
     )
@@ -54,6 +55,13 @@ Object.entries(chatData).forEach(([sceneName, entries]) => {
 })
 const luckyNumbers = _luckyNumbers as LuckyNumbersPerScene;
 
+type ChatPointerPerScene = { [sceneName in SceneName]: number | undefined }
+const _chatPointers: any = {}
+Object.keys(chatData).forEach((sceneName) => {
+    _chatPointers[sceneName] = 0
+})
+const chatPointers = _chatPointers as ChatPointerPerScene;
+
 interface EMSCHER_SCENE { 
     cam_pos: Vector3,
     cam_pov: Vector3,
@@ -63,11 +71,13 @@ interface EMSCHER_SCENE {
 
 interface AppState {
     isChatOpen: boolean,
+    isSimulateTyping: boolean,
+    autoChat: undefined | ReturnType<typeof setTimeout>
     unreadMessages: number,
     messages: Array<ChatMessage>,
     scene: SceneName,
-    chatPointer?: { index: number },
-    luckyNumbers: {[sceneName in SceneName]: Array<number>},
+    chatPointers: ChatPointerPerScene,
+    luckyNumbers: LuckyNumbersPerScene,
     tween_time: number,
     rocks: Array<Mesh>,
     scenes: Array<EMSCHER_SCENE>
@@ -75,12 +85,12 @@ interface AppState {
 
 export const appState: AppState = reactive({
     isChatOpen: false,
+    isSimulateTyping: false,
+    autoChat: undefined,
     unreadMessages: 0,
     messages: [],
     scene: 'Intro',
-    chatPointer: {
-        index: 0
-    },
+    chatPointers,
     luckyNumbers,
     tween_time: 1000,
     rocks: [],

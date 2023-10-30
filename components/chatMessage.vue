@@ -1,15 +1,19 @@
 <template>
   <div
     class="chat-message"
-    :class="{ outgoing: message.direction === ChatMessageDirection.OUTGOING }"
+    :class="{ 
+      outgoing: message.direction === ChatMessageDirection.OUTGOING, 
+      system: message.direction === ChatMessageDirection.SYSTEM,
+      typing: message.mediaFile?.includes('typing') 
+    }"
   >
     <img
       v-if="message.mediaType === 'image'"
-      :src="'/media/' + message.mediaFile"
+      :src="message.mediaFile.startsWith('/') ? message.mediaFile : '/media/' + message.mediaFile"
       alt=""
     >
     <div
-      v-if="message.text && message.direction === ChatMessageDirection.INCOMING"
+      v-if="message.text && message.direction !== ChatMessageDirection.OUTGOING"
       v-html="message.text"
     />
     <div
@@ -42,6 +46,15 @@ defineProps<{message: ChatMessage}>()
 .chat-message.outgoing {
   background-color: var(--yellow);
   align-self: flex-end;
+}
+.chat-message.system {
+  background: none;
+  color: grey;
+  width: initial;
+  text-align: center;
+}
+.chat-message.typing {
+  width: 50px;
 }
 img {
   width: 100%;
