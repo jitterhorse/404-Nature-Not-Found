@@ -1,8 +1,10 @@
 import {ChatEntry, ChatMessage, TransitionType} from "~/data/types";
 import chatData from '~/assets/data/chat.json'
-import { Mesh, Object3D, SkinnedMesh, Vector3 } from "three";
+import { Mesh, Vector3 } from "three";
 
-const availableScenes = Object.keys(chatData);
+type SceneName = keyof typeof chatData;
+
+const availableScenes = Object.keys(chatData) as Array<SceneName>;
 
 export const newAutomaticMessage = () => {
     if (!appState.chatPointer) {
@@ -10,7 +12,7 @@ export const newAutomaticMessage = () => {
         return;
     }
 
-    const entry: ChatEntry = chatData[appState.scene][appState.chatPointer.index]
+    const entry = chatData[appState.scene][appState.chatPointer.index] as ChatEntry
     appState.messages.push(entry.message)
 
     if (entry.transitionType === TransitionType.LINEAR) {
@@ -47,7 +49,7 @@ export const goScene = (direction: 1 | -1) => {
 }
 
 export const addScene = (content : Array<any>) => {
-    var es = {} as EMSCHER_SCENE; 
+    const es = {} as EMSCHER_SCENE;
     es.cam_pos = new Vector3();
     es.cam_pov = new Vector3();
     es.cam_fov = 0;
@@ -75,28 +77,30 @@ export const addScene = (content : Array<any>) => {
 
 }
 
-const luckyNumbers = {}
+type LuckyNumbersPerScene = {[sceneName in SceneName]: Array<number>}
+const _luckyNumbers: any = {}
 Object.entries(chatData).forEach(([sceneName, entries]) => {
-    luckyNumbers[sceneName] = entries
+    _luckyNumbers[sceneName] = entries
         .map(({ isLuckyContent }, entryIndex) => ({ isLuckyContent, entryIndex}))
         .filter(({ isLuckyContent }) => isLuckyContent)
         .map(({ entryIndex }) => entryIndex)
 })
+const luckyNumbers = _luckyNumbers as LuckyNumbersPerScene;
 
 interface EMSCHER_SCENE { 
-    cam_pos: THREE.Vector3,
-    cam_pov: THREE.Vector3,
+    cam_pos: Vector3,
+    cam_pov: Vector3,
     cam_fov: number,
     objs: Array<any> 
-};
+}
 
 interface AppState {
     isChatOpen: boolean,
     unreadMessages: number,
     messages: Array<ChatMessage>,
-    scene: string,
+    scene: SceneName,
     chatPointer?: { index: number },
-    luckyNumbers: {[sceneName: string]: Array<number>},
+    luckyNumbers: {[sceneName in SceneName]: Array<number>},
     tween_time: number,
     rocks: Array<Mesh>,
     scenes: Array<EMSCHER_SCENE>
