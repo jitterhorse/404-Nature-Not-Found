@@ -9,5 +9,8 @@
   },
   "volta": {
     "node": "18.18.0"
+  },
+  "devDependencies": {
+    "marked": "^9.1.2"
   }
 }
