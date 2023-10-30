@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'Eau Douce Sans';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 200;
     src: url('~/assets/fonts/eau_douce_sans_light.woff2') format('woff2');
 }
 @font-face {
     font-family: 'Eau Douce Sans';
-    font-style: normal;
+    font-style: bold;
     font-weight: 600;
     src: url('~/assets/fonts/eau_douce_sans_bold.woff2') format('woff2');
 }
 @font-face {
-    font-family: 'Bernard MT Condensed';
+    font-family: 'Gowa-Regular';
     font-style: normal;
     font-weight: 400;
-    src: url('~/assets/fonts/bernard_mt_condensed_regular.woff2') format('woff2');
+    src: url('~/assets/fonts/Gowa-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'Flow Circular';
@@ -31,7 +31,7 @@ html {
     --padding: 6px;
 
     --body-font: 'Eau Douce Sans';
-    --header-font: 'Bernard MT Condensed';
+    --header-font: 'Gowa-Regular';
     --wireframe-font: 'Flow Circular';
 
     min-height: 100vh;
@@ -41,6 +41,7 @@ body {
     margin: 0;
     font-family: var(--body-font);
     color: white;
+    line-height: 140%;
 }
 main, .main {
     max-width: 40rem;
@@ -68,4 +69,8 @@ h1, h2, h3 {
 .infocaption{
     font-size: 90%;
     font-style: italic;
+}
+
+.infospacer{
+    height: 24px;
 }
