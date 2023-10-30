@@ -1,8 +1,8 @@
 import {UseSeoMetaInput} from "@unhead/schema";
 
 export const seoDefaults: UseSeoMetaInput = {
-    description: '404 Nature not Found is an art project.', // todo: short description
-    ogImage: 'https://example.com/image.png', // todo: suitable image for social media
+    description: '404 - Natur nicht gefunden / Nature not found || Digitale Skulptur zur Renaturierung der Emscher und zur Natur aus zweiter Hand. ', 
+    ogImage: './assets/img/404_preview.jpg', 
     twitterCard: 'summary_large_image',
 }
 

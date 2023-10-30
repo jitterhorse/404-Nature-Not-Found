@@ -15,6 +15,6 @@
 import {useSimplifiedSeo} from "~/utils/seo";
 
 useSimplifiedSeo({
-  title: '404 Nature not Found - Credits' // todo: adjust page title
+  title: '404 - Natur nicht gefunden // Credits und Links' 
 })
 </script>

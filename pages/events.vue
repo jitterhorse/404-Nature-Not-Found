@@ -57,6 +57,6 @@
 import {useSimplifiedSeo} from "~/utils/seo";
 
 useSimplifiedSeo({
-  title: '404 Nature not Found - Events' // todo: adjust page title
+  title: '404 - Natur nicht gefunden / Nature not found || PopUp Ausstellungen und Partizipation' 
 })
 </script>

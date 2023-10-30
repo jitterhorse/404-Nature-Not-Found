@@ -35,7 +35,7 @@ import CloseIcon from '~/assets/svg/close.svg'
 import {useSimplifiedSeo} from "~/utils/seo";
 
 useSimplifiedSeo({
-  title: '404 Nature not Found' // todo: adjust page title
+  title: '404 - Natur nicht gefunden / Nature not found || Online-Kunstwerk zur Renaturierung der Emscher und Natur aus zweiter Hand'
 })
 
 watch(
