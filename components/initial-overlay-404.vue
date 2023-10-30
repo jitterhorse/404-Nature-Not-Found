@@ -1,8 +1,7 @@
 <template>
   <div
-    v-if="introStage < 2"
     class="overlay"
-    :class="{fade: introStage === 1}"
+    :class="{fade: fadeOutAnimation}"
   >
     <header404 />
   </div>
@@ -13,14 +12,13 @@ import {sleep} from "~/utils/misc";
 
 const { end } = defineProps<{ end: () => void }>()
 
-const introStage = ref(0)
+const fadeOutAnimation = ref(false)
 
 if (process.client) {
   (async () => {
     await sleep(5000)
-    introStage.value = 1
+    fadeOutAnimation.value = true
     await sleep(10000)
-    introStage.value = 2
     end()
   })()
 }
