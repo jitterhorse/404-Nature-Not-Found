@@ -12,6 +12,7 @@ Built with Nuxt 3 / Vue 3
 |    20 | Chat backdrop                                    |
 |    21 | Chat button                                      |
 |    25 | Chat                                             |
+|    30 | 404 form, 404 overlay                            |
 
 ## Data
 

@@ -24,19 +24,15 @@ export interface ChatEntry {
     isLuckyContent: boolean
 }
 
-export interface notFoundPage {
+export interface Page404 {
     id: string
     name?: string
-    nameai?:string
+    nameAi?:string
     text?: string
-    textai?: string
+    textAi?: string
     photo?: string
-    paint?: string
-    photoAI1?: string
-    photoAI2?: string
-    photoAI3?: string
-    paintAI1?: string
-    paintAI2?: string
-    paintAI3?: string
+    photosAi: Array<string>
+    painting?: string
+    paintingsAi: Array<string>
 }
 

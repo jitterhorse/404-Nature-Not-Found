@@ -20,6 +20,7 @@
 html {
     --pink: #FF06FF;
     --yellow: #FFEF00;
+    --gray: #D9D9D9;
     --unit: 24px;
     --padding: 6px;
 
@@ -33,6 +34,10 @@ body {
     margin: 0;
     font-family: var(--body-font);
     color: white;
+}
+main, .main {
+    max-width: 40rem;
+    margin: 0 auto;
 }
 h1, h2, h3 {
     font-family: var(--header-font);

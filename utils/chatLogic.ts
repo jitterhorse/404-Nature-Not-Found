@@ -68,8 +68,8 @@ const _sendAutoResponse = (): void => {
     })
 }
 
-const _stopChat = () => {
-    clearInterval(appState.autoChat);
+export const stopAutoChat = () => {
+    clearTimeout(appState.autoChat);
     appState.autoChat = undefined;
 }
 
@@ -82,7 +82,7 @@ export const startAutoChat = () => {
 }
 
 export const insertUserMessage = (text: string): void => {
-    _stopChat()
+    stopAutoChat()
 
     appState.messages.push({
         id: `user-${appState.messages.length}`,
@@ -95,7 +95,7 @@ export const insertUserMessage = (text: string): void => {
 }
 
 export const chatHandleSceneChange = (oldSceneName: string) => {
-    _stopChat()
+    stopAutoChat()
 
     appState.messages.push({
         id: `system-leave-${appState.messages.length}`,
@@ -109,4 +109,14 @@ export const chatHandleSceneChange = (oldSceneName: string) => {
     })
 
     startAutoChat();
+}
+
+export const openChat = () => {
+    appState.isChatOpen = true;
+    stopAuto404();
+}
+
+export const closeChat = () => {
+    appState.isChatOpen = false;
+    startAuto404();
 }

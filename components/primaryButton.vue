@@ -1,5 +1,9 @@
 <template>
-  <button v-if="componentType === 'button'" @click="click" :type="type">
+  <button
+    v-if="componentType === 'button'"
+    :type="type"
+    @click="click"
+  >
     <slot />
   </button>
   <NuxtLink
@@ -12,18 +16,11 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  absolutePosition?: [String, String],
   href?: String
   click?: () => void
   size?: number
   type?: string
 }>(), { size: 1, type: 'button' })
-
-const position = props.absolutePosition ? 'fixed' : 'initial'
-const top = props.absolutePosition && props.absolutePosition[0] === 'top' ? 'var(--unit)' : 'initial';
-const bottom = props.absolutePosition && props.absolutePosition[0] === 'bottom' ? 'var(--unit)' : 'initial';
-const left = props.absolutePosition && props.absolutePosition[1] === 'left' ? 'var(--unit)' : 'initial';
-const right = props.absolutePosition && props.absolutePosition[1] === 'right' ? 'var(--unit)' : 'initial';
 
 const componentType = props.href ? 'link' : 'button';
 </script>

@@ -36,5 +36,6 @@ button, a {
   background: none;
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 </style>
