@@ -13,13 +13,27 @@
     <figcaption class="infocaption">PopUp Ausstellung bei MXR Lab in Gelsenkirchen</figcaption>
     <img class="infoimage" :src=image5>
     <figcaption class="infocaption">Gespräch über die Recherche</figcaption>
+
+    <div class="infospacer"></div>
+
     <p> 
       Ich lud die Besucher:innen ebenfalls ein, eine eigene "404 - Natur nicht gefunden" Fehlerseite zu erstellen. Ich bat sie um folgendes: 
+    </p>
+    <p>
       A) Eine kurzen Text über eine eigene Begegnung zwischen Natur und Kultur, zwischen Emschernatur und Industrie, zwischen Stadt und Fluss
+    </p>
+    <p>
       B) Ein eigenes, rechtefreies Foto, welches dieser Geschichte oder Erinnerung visuellen Ausdruck verleihen kann
+    </p>
+    <p>
       C) Eine mit pinkem und gelben Textmarker gezeichnete, (gegenständlichen oder abstrakten) Darstellung der beschriebenen Begegnung. Diese konnte auch eine Erweiterung oder Ergänzung des Fotos oder des Textes sein. 
+    </p>
+    <p>
       Es konnten alle drei Teilelemente gespendet werden, es reichte aber auch eines der Elemente. Auch Online konnten Interessierte eine Spende durch ein Formular hinterlassen. 
     </p>
+
+    <div class="infospacer"></div>
+
     <img class="infoimage" :src=image1>
     <figcaption class="infocaption">Materialien zur Partizipation und Textrefernzen</figcaption>
     <img class="infoimage" :src=image4>
@@ -28,6 +42,9 @@
     <figcaption class="infocaption">Eine Skizze mit Textmarkern malen</figcaption>
     <img class="infoimage" :src=image6>
     <figcaption class="infocaption">Testen der digitalen Skizzen</figcaption>
+
+    <div class="infospacer"></div>
+    
     <p>
       Sogenannte künstliche Intelligenz spendete auf Geheiß des Künstlers hin, ebenfalls Zeichnungen, Bilder und kurze Geschichten.Die so angehäuften Perspektiven und deren technische Verarbeitung sowie computergestützte Weiterentwicklung ist verteilt in der hier vorliegenden digitalen Skulptur zu finden. Die Partizipation der Besucher:innen floss in das Kunstwerk ein und schafft einen Blick auf ein durch menschliches Erinnerungsvermögen und technische Speicherung sowie Weiterverarbeitung verändertes Naturverständnis. 
     </p>

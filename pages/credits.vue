@@ -5,8 +5,14 @@
     <p>ein digitales, partizipatives Kunstwerk von Daniel Hengst</p>
     <p>
       Creative Technologist & Frontend Programmierung Online-Kunstwerk: Clemens Schöll
+    </p>
+    <p>
       Technische Unterstützung + Programmierung Formular für Online-Partizipation: Magnus Brühl
+    </p>
+    <p>
       Mitarbeit Öffentlichkeitsarbeit und Projektplanung: Sabrina Borowski & Simon Schlenke
+    </p>
+    <p>
       Fotodokumentation und organisatorische Unterstützung: Roman Pilgrim & Matthias Krentzek
     </p>
     <p>
@@ -21,9 +27,7 @@
     <p>
       Dank an mxr storytelling, Petra Steinhardt & dem Team von kunstwerden e.V., Claudia Kauertz, Gabriele Aschöwer, Peter Schwiderowski, Matthias Hower, Thomas Dupke, Mechthild Semrau, Sabrina Becker und Mathilde Heitmann-Taillefer
     </p>
-    <div class="spacer">
-
-    </div>
+    <div class="infospacer"></div>
     <p>
       Kontakt:
       studio@danielhengst.de
