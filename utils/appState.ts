@@ -1,5 +1,6 @@
 import {ChatEntry, ChatMessage, TransitionType} from "~/data/types";
 import chatData from '~/assets/data/chat.json'
+import { Mesh, Object3D, SkinnedMesh, Vector3 } from "three";
 
 const availableScenes = Object.keys(chatData);
 
@@ -41,8 +42,37 @@ export const goScene = (direction: 1 | -1) => {
     const currentSceneIndex = availableScenes.indexOf(appState.scene)
     const nextSceneIndex = (currentSceneIndex + availableScenes.length + direction) % availableScenes.length
     appState.scene = availableScenes[nextSceneIndex]
+        
+    window.dispatchEvent(new CustomEvent('change-scene', {detail: {targetScene: appState.scene, targetNumber: nextSceneIndex}}))
+}
 
-    window.dispatchEvent(new CustomEvent('change-scene', {detail: {targetScene: appState.scene}}))
+export const addScene = (content : Array<any>) => {
+    var es = {} as EMSCHER_SCENE; 
+    es.cam_pos = new Vector3();
+    es.cam_pov = new Vector3();
+    es.cam_fov = 0;
+    es.objs = [];
+
+    content.forEach((elem) => {
+        if(elem.name.includes("cam")){
+            if(elem.name.includes("pos")){
+                es.cam_pos = elem.position
+            }
+            else if(elem.name.includes("pov")){
+                es.cam_pov = elem.position
+                const splits = elem.name.split('_');
+                es.cam_fov = splits[splits.length-1];
+            }
+        }
+        else{
+            es.objs.push(elem);
+            console.log(elem);
+        }
+    }
+    )
+
+    appState.scenes.push(es);
+
 }
 
 const luckyNumbers = {}
@@ -53,13 +83,23 @@ Object.entries(chatData).forEach(([sceneName, entries]) => {
         .map(({ entryIndex }) => entryIndex)
 })
 
+interface EMSCHER_SCENE { 
+    cam_pos: THREE.Vector3,
+    cam_pov: THREE.Vector3,
+    cam_fov: number,
+    objs: Array<any> 
+};
+
 interface AppState {
     isChatOpen: boolean,
     unreadMessages: number,
     messages: Array<ChatMessage>,
     scene: string,
     chatPointer?: { index: number },
-    luckyNumbers: {[sceneName: string]: Array<number>}
+    luckyNumbers: {[sceneName: string]: Array<number>},
+    tween_time: number,
+    rocks: Array<Mesh>,
+    scenes: Array<EMSCHER_SCENE>
 }
 
 export const appState: AppState = reactive({
@@ -70,5 +110,9 @@ export const appState: AppState = reactive({
     chatPointer: {
         index: 0
     },
-    luckyNumbers
+    luckyNumbers,
+    tween_time: 1000,
+    rocks: [],
+    scenes: []
 })
+

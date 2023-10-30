@@ -2,6 +2,10 @@
 
 Built with Nuxt 3 / Vue 3
 
+# compile content
+cd data
+npm run start 
+
 ## Z-Indices
 | Level | Usage                                            |
 |------:|--------------------------------------------------|

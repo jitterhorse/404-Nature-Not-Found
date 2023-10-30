@@ -6,14 +6,15 @@
 </template>
 
 <script setup>
-  import {worldSetup} from "~/utils/worldSetup.ts";
+  import {worldSetup} from "~/utils/worldSetup.js";
   import { ref, onMounted} from "vue";
 
   const renderContainer = ref(null)
+  var scene = ref(null)
 
   onMounted(() => {
-    console.log(renderContainer)
-    worldSetup(renderContainer.value);
+    scene = new worldSetup(renderContainer.value);
+    scene.start();
   })
 </script>
 
