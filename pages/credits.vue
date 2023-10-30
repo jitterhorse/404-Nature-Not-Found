@@ -12,4 +12,9 @@
   </info-layout>
 </template>
 <script setup lang="ts">
+import {useSimplifiedSeo} from "~/utils/seo";
+
+useSimplifiedSeo({
+  title: '404 Nature not Found - Credits' // todo: adjust page title
+})
 </script>

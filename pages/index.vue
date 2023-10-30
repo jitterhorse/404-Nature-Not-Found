@@ -32,6 +32,11 @@ import BackIcon from '~/assets/svg/back.svg'
 import ForwardIcon from '~/assets/svg/forward.svg'
 import ChatIcon from '~/assets/svg/chat.svg'
 import CloseIcon from '~/assets/svg/close.svg'
+import {useSimplifiedSeo} from "~/utils/seo";
+
+useSimplifiedSeo({
+  title: '404 Nature not Found' // todo: adjust page title
+})
 
 watch(
     () => appState.isChatOpen,
