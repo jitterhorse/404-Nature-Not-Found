@@ -20,6 +20,7 @@
       </primary-button>
     </absolute-position>
     <chat v-if="appState.isChatOpen" :close-chat="() => appState.isChatOpen = false"></chat>
+    <form404 v-if="appState.event404"></form404>
     <main>
       <!-- pop ups etc -->
     </main>
@@ -41,10 +42,20 @@ watch(
       window.dispatchEvent(new CustomEvent('renderer-status', {detail: {targetStatus: !appState.isChatOpen}}))
     }
 )
+watch(
+    () => appState.event404,
+    () => {
+      window.dispatchEvent(new CustomEvent('renderer-status', {detail: {targetStatus: !appState.event404}}))
+    }
+)
 
 if (process.client) {
   setInterval(() => newAutomaticMessage(), 3000)
+
+  appState.last404EventTime = new Date().getTime();
+  setInterval(() => start404Event(), 5000)
 }
+
 </script>
 
 <style scoped>

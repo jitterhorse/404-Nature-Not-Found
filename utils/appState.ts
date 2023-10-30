@@ -66,13 +66,22 @@ export const addScene = (content : Array<any>) => {
         }
         else{
             es.objs.push(elem);
-            console.log(elem);
+            //console.log(elem);
         }
     }
     )
 
     appState.scenes.push(es);
 
+}
+
+export const start404Event = () => {
+    if(new Date().getTime() - appState.last404EventTime >= 2000){
+        if(Math.random() > 0.0){
+            appState.event404 = true;
+            appState.last404EventTime = new Date().getTime();
+        } 
+    }    
 }
 
 const luckyNumbers = {}
@@ -92,6 +101,8 @@ interface EMSCHER_SCENE {
 
 interface AppState {
     isChatOpen: boolean,
+    event404: boolean,
+    last404EventTime: number,
     unreadMessages: number,
     messages: Array<ChatMessage>,
     scene: string,
@@ -104,6 +115,8 @@ interface AppState {
 
 export const appState: AppState = reactive({
     isChatOpen: false,
+    event404: false,
+    last404EventTime: 0,
     unreadMessages: 0,
     messages: [],
     scene: 'Intro',
