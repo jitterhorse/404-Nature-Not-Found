@@ -10,23 +10,6 @@ import { Loop } from "~/emscher/loop.js"
 import { Resizer } from "~/emscher/Resizer.js";
 import { Emscher } from '~/emscher/emscher';
 
-
-const SCENE_COLORS = {
-    Intro: 0x00ff00,
-    Begriffe: 0x00ffff,
-    Pferde: 0x0000ff,
-    Rezepte: 0xff00ff,
-    Emscher: 0xff0000,
-    Autos: 0xffff00,
-    Beschwerde: 0xff8888,
-    Strahlwirkung: 0xff88ff,
-    Fiktion: 0x88ffff,
-    Cholera: 0x00ff88,
-}
-
-let currentScene = 'Intro';
-let shouldRender = true;
-
 let camera;
 let renderer;
 let scene;
@@ -69,11 +52,7 @@ export class worldSetup {
         )
 
         // add Buttons Navigation
-        window.addEventListener('renderer-status', (event) => {
-            shouldRender = event.detail.targetStatus;
-        })
-        window.addEventListener('change-scene', (event) => { 
-          currentScene = event.detail.targetScene;
+        window.addEventListener('change-scene', (event) => {
           this.changeScene(event.detail.targetNumber);
         })
     }
@@ -81,7 +60,6 @@ export class worldSetup {
     changeScene(scene){
       camera.goToScene(scene);
       controls.setTarget(scene);
-      currentScene = scene;
     }
 
     load(){

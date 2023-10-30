@@ -35,9 +35,11 @@ class Loop {
   
   start() {
     this.renderer.setAnimationLoop(() => {
-      this.tick();
-      //render a frame
-      this.renderer.render(this.scene, this.camera);
+      if (!appState.isChatOpen && appState.currentPage404 === undefined) {
+        this.tick();
+        //render a frame
+        this.renderer.render(this.scene, this.camera);
+      }
     });
   }
   
@@ -75,21 +77,19 @@ class Loop {
   }
   
   tick() {
-      if(appState.isChatOpen === false){
-        this.stats.begin();
-        const delta = this.clock.getDelta();
-        const time = this.clock.getElapsedTime();
-        for (const object of this.updatables) {
-            object.tick(delta,time);
-        }
-        this.controls.tick(delta);
-        this.effects.tick();
-        this.camera.tick();
-        TWEEN.update();
-        this.stats.end();
-        this.stats.update();
-      }
+    this.stats.begin();
+    const delta = this.clock.getDelta();
+    const time = this.clock.getElapsedTime();
+    for (const object of this.updatables) {
+        object.tick(delta,time);
     }
+    this.controls.tick(delta);
+    this.effects.tick();
+    this.camera.tick();
+    TWEEN.update();
+    this.stats.end();
+    this.stats.update();
+  }
 }
  
 export { Loop }

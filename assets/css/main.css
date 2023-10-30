@@ -21,6 +21,7 @@
 html {
     --pink: #FF06FF;
     --yellow: #FFEF00;
+    --gray: #D9D9D9;
     --unit: 24px;
     --padding: 6px;
 
@@ -35,6 +36,18 @@ body {
     font-family: var(--body-font);
     color: white;
     line-height: 140%;
+}
+main, .main {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 30;
 }
 h1, h2, h3 {
     font-family: var(--header-font);

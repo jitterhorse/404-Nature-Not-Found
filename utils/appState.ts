@@ -1,7 +1,9 @@
-import { ChatMessage, notFoundPage } from "~/data/types";
+import { ChatMessage, Page404 } from "~/data/types";
 import chatData from '~/assets/data/chat.json'
+import pages404Data from '~/assets/data/pages404.json'
 import { Mesh, Vector3 } from "three";
 import { chatHandleSceneChange } from "~/utils/chatLogic";
+import {getPages404Bag} from "~/utils/pages404Logic";
 
 type SceneName = keyof typeof chatData;
 
@@ -81,13 +83,11 @@ interface AppState {
     tween_time: number,
     rocks: Array<Mesh>,
     scenes: Array<EMSCHER_SCENE>,
-    pages404: Array<notFoundPage>,
-    notFoundBag: Array<number>,
-    last404EventTime: number,
-    event404: boolean
+    currentPage404: Page404 | 'FORM' | undefined,
+    pages404IndicesBag: Array<number>,
 }
 
-export const appState: AppState = reactive({
+export const appState: AppState = reactive<AppState>({
     isChatOpen: false,
     isSimulateTyping: false,
     autoChat: undefined,
@@ -100,9 +100,7 @@ export const appState: AppState = reactive({
     tween_time: 1000,
     rocks: [],
     scenes: [],
-    pages404: [],
-    notFoundBag: [],
-    last404EventTime: 0,
-    event404: false
+    currentPage404: undefined,
+    pages404IndicesBag: getPages404Bag(),
 })
 

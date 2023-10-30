@@ -1,21 +1,27 @@
 <template>
-    <div class="form-container">
-        <div>test</div>
-        <button @click="stop404Event" value="Close">Close</button>
-    </div>
+  <div class="form-container">
+    <div>test</div>
+    <button
+      value="Close"
+      @click="stop404Event"
+    >
+      Close
+    </button>
+  </div>
 </template>
 
 <script setup lang="ts">
+import {showPage404} from "~/utils/pages404Logic";
+
 const stop404Event = () => {
-  console.log("close");
-  appState.event404 = false;
+  showPage404()
 }
 </script>
 
 <style scoped>
 .form-container {
     position: fixed;
-    z-index: 28;
+    z-index: 30;
     @media (min-width: 800px) {
       top: 50%;
       left: 50%;

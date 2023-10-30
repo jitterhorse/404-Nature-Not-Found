@@ -1,17 +1,24 @@
 <template>
   <div>
+    <initial-overlay404 :end="introEnded" />
     <emscher-world />
     <nav>
       <primary-button :click="() => goScene(-1)">
         <BackIcon />
       </primary-button>
-      <primary-button href="/info">404</primary-button>
+      <primary-button href="/info">
+        404
+      </primary-button>
       <primary-button :click="() => goScene(+1)">
         <ForwardIcon />
       </primary-button>
     </nav>
-    <absolute-position vertical="bottom" horizontal="right" z-index="21">
-      <primary-button :click="() => appState.isChatOpen = !appState.isChatOpen">
+    <absolute-position
+      vertical="bottom"
+      horizontal="right"
+      z-index="21"
+    >
+      <primary-button :click="() => appState.isChatOpen ? closeChat() : openChat()">
         <ClientOnly>
           <badge-count :count="appState.unreadMessages" />
         </ClientOnly>
@@ -19,11 +26,15 @@
         <chat-icon v-else />
       </primary-button>
     </absolute-position>
-    <chat v-if="appState.isChatOpen" :close-chat="() => appState.isChatOpen = false"></chat>
-    <form404 v-if="appState.event404"></form404>
-    <main>
-      <!-- pop ups etc -->
-    </main>
+    <chat
+      v-if="appState.isChatOpen"
+      :close-chat="closeChat"
+    />
+    <form404 v-if="appState.currentPage404 === 'FORM'" />
+    <page404
+      v-if="appState.currentPage404 && appState.currentPage404 !== 'FORM'"
+      :page404="appState.currentPage404"
+    />
   </div>
 </template>
 
@@ -49,17 +60,16 @@ watch(
 )
 
 watch(
-    () => appState.event404,
+    () => appState.currentPage404 === undefined,
     () => {
-      window.dispatchEvent(new CustomEvent('renderer-status', {detail: {targetStatus: !appState.event404}}))
+      window.dispatchEvent(new CustomEvent('renderer-status', {detail: {targetStatus: appState.currentPage404 === undefined}}))
     }
 )
 
-if (process.client) {
+const introEnded = () => {
   startAutoChat()
   startAuto404()
 }
-
 </script>
 
 <style scoped>
@@ -72,9 +82,5 @@ nav {
 
   display: flex;
   justify-content: space-between;
-}
-main {
-  position: relative;
-  z-index: 1;
 }
 </style>

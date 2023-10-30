@@ -2,12 +2,10 @@ import chatData from "assets/data/chat.json";
 import responsesData from "assets/data/responses.json";
 import {ChatEntry, ChatMessageDirection, TransitionType} from "~/data/types";
 import {appState} from "~/utils/appState";
+import {randomEntry, sleep} from "~/utils/misc";
 
 const CHAT_FREQUENCY = [3000, 10000]
 const CHAT_STOP = "STOP";
-
-const randomEntry = <T>(array: Array<T>): T => array[ Math.floor(Math.random() * array.length)]
-const sleep = (milliseconds: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, milliseconds))
 
 const _newAutomaticMessage = async (): Promise<string | undefined> => {
     const chatPointer = appState.chatPointers[appState.scene]
@@ -68,8 +66,8 @@ const _sendAutoResponse = (): void => {
     })
 }
 
-const _stopChat = () => {
-    clearInterval(appState.autoChat);
+export const stopAutoChat = () => {
+    clearTimeout(appState.autoChat);
     appState.autoChat = undefined;
 }
 
@@ -82,7 +80,7 @@ export const startAutoChat = () => {
 }
 
 export const insertUserMessage = (text: string): void => {
-    _stopChat()
+    stopAutoChat()
 
     appState.messages.push({
         id: `user-${appState.messages.length}`,
@@ -95,7 +93,7 @@ export const insertUserMessage = (text: string): void => {
 }
 
 export const chatHandleSceneChange = (oldSceneName: string) => {
-    _stopChat()
+    stopAutoChat()
 
     appState.messages.push({
         id: `system-leave-${appState.messages.length}`,
@@ -109,4 +107,14 @@ export const chatHandleSceneChange = (oldSceneName: string) => {
     })
 
     startAutoChat();
+}
+
+export const openChat = () => {
+    appState.isChatOpen = true;
+    stopAuto404();
+}
+
+export const closeChat = () => {
+    appState.isChatOpen = false;
+    startAuto404();
 }

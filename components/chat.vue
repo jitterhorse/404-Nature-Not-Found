@@ -139,6 +139,7 @@ watch([() => appState.isSimulateTyping, appState.messages], () => {
 }
 textarea {
   flex: 1;
+  min-width: 0;
   font-family: var(--body-font);
   font-size: 120%;
 }

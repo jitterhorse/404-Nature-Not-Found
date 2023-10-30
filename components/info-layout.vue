@@ -46,10 +46,6 @@ import Insect3 from '~/assets/img/insect_2.png'
 </script>
 
 <style scoped>
-main {
-  max-width: 40rem;
-  margin: 0 auto;
-}
 nav {
   position: sticky;
   top: 0;
