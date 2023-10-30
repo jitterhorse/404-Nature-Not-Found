@@ -43,7 +43,7 @@ watch(
 )
 
 if (process.client) {
-  setInterval(() => newAutomaticMessage(), 3000)
+  startAutoChat()
 }
 </script>
 
