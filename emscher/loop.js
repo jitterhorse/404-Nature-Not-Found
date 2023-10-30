@@ -75,19 +75,20 @@ class Loop {
   }
   
   tick() {
-      this.stats.begin();
-      const delta = this.clock.getDelta();
-      const time = this.clock.getElapsedTime();
-      for (const object of this.updatables) {
-          object.tick(delta,time);
+      if(appState.isChatOpen === false){
+        this.stats.begin();
+        const delta = this.clock.getDelta();
+        const time = this.clock.getElapsedTime();
+        for (const object of this.updatables) {
+            object.tick(delta,time);
+        }
+        this.controls.tick(delta);
+        this.effects.tick();
+        this.camera.tick();
+        TWEEN.update();
+        this.stats.end();
+        this.stats.update();
       }
-      this.controls.tick(delta);
-      this.effects.tick();
-      this.camera.tick();
-      TWEEN.update();
-      this.stats.end();
-      this.stats.update();
-      
     }
 }
  
