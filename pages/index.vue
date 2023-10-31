@@ -7,7 +7,7 @@
         <BackIcon />
       </primary-button>
       <primary-button href="/info">
-        404
+        <h4>404</h4>
       </primary-button>
       <primary-button :click="() => goScene(+1)">
         <ForwardIcon />
@@ -82,5 +82,9 @@ nav {
 
   display: flex;
   justify-content: space-between;
+}
+
+.mainButton{
+  font-family: var(--header-font);
 }
 </style>

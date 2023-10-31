@@ -102,7 +102,7 @@ import {closePage404} from "~/utils/pages404Logic";
 
 const {page404} = defineProps<{ page404: Page404 }>()
 
-const backgroundImage = `url('${(page404.photo || page404.painting || page404.photosAi[0] || page404.paintingsAi[0]) as string}')`
+const backgroundImage = `url('${(page404.painting || page404.paintingsAi[0]) as string}')`
 
 const isPageExpanded = ref(false)
 const overlayContainer = ref<HTMLElement | null>(null)

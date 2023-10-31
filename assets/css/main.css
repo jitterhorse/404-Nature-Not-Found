@@ -53,6 +53,10 @@ h1, h2, h3 {
     font-family: var(--header-font);
     color: var(--pink);
 }
+h4 {
+    font-family: var(--header-font);
+    font-size: 200%;
+}
 
 .infoimage{
     width: 100%;

@@ -22,7 +22,8 @@
       Das Projekt wurde finanziell unterstützt durch die Stadt Essen. Danke an das Team vom Kulturamt Essen
     </p>
     <p>
-      PopUp-Ausstellungen bei kunstwerden e.V. in Essen, Werden und im MXR Lab in Gelsenkirchen
+      PopUp-Ausstellungen fanden im Juni 2023 beim Verein kunstwerden in Essen, Werden und im MXR Lab in Gelsenkirchen statt.
+      Danke an alle Gäste und alle Spender:Innen!
     </p>
     <p>
       Dank an mxr storytelling, Petra Steinhardt & dem Team von kunstwerden e.V., Claudia Kauertz, Gabriele Aschöwer, Peter Schwiderowski, Matthias Hower, Thomas Dupke, Mechthild Semrau, Sabrina Becker und Mathilde Heitmann-Taillefer
