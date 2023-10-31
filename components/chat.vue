@@ -97,8 +97,8 @@ watch([() => appState.isSimulateTyping, appState.messages], () => {
     right: calc(4 * var(--unit));
     width: 100%;
     height: 100%;
-    max-width: 15em;
-    max-height: 30em;
+    max-width: 25em;
+    max-height: 40em;
 
     border: white 2px solid;
   }

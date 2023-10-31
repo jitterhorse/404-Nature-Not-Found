@@ -4,7 +4,7 @@ import {ChatEntry, ChatMessageDirection, TransitionType} from "~/data/types";
 import {appState} from "~/utils/appState";
 import {randomEntry, sleep} from "~/utils/misc";
 
-const CHAT_FREQUENCY = [3000, 10000]
+const CHAT_FREQUENCY = [6000, 20000]
 const CHAT_STOP = "STOP";
 
 const _newAutomaticMessage = async (): Promise<string | undefined> => {
