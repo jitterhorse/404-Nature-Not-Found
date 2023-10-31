@@ -32,7 +32,7 @@ jobs:
           host: ngcobalt395.manitu.net
           port: 23
           user: ftp200027130
-          pass: ${{ secrets.FTP_PASSWORD }}
+          pass: ${{ secrets.FTP_PASSWORD_PROD }}
           # lftp settings
           onlyNewer: true
           settings: 'sftp:auto-confirm=yes'
