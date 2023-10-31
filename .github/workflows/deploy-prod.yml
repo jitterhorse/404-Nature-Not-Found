@@ -1,8 +1,8 @@
-name: Build and deploy staging
+name: Build and deploy to production
 on:
   push:
     branches:
-      - dev
+      - master
 jobs:
   build:
     name: Build static Nuxt.js page and deploy to staging server via FTP
@@ -31,7 +31,7 @@ jobs:
         with:
           host: ngcobalt395.manitu.net
           port: 23
-          user: ftp200026136
+          user: ftp200027130
           pass: ${{ secrets.FTP_PASSWORD }}
           # lftp settings
           onlyNewer: true
