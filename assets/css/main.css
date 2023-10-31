@@ -16,7 +16,12 @@
     font-weight: 400;
     src: url('~/assets/fonts/Gowa-Regular.woff2') format('woff2');
 }
-
+@font-face {
+    font-family: 'Flow Circular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('~/assets/fonts/flow-circular.woff') format('woff');
+}
 
 html {
     --pink: #FF06FF;
@@ -27,6 +32,7 @@ html {
 
     --body-font: 'Eau Douce Sans';
     --header-font: 'Gowa-Regular';
+    --wireframe-font: 'Flow Circular';
 
     min-height: 100vh;
     background-color: black;

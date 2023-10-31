@@ -73,6 +73,7 @@ interface EMSCHER_SCENE {
 interface AppState {
     isChatOpen: boolean,
     isSimulateTyping: boolean,
+    isShowIntro: boolean,
     autoChat: undefined | ReturnType<typeof setTimeout>,
     auto404: undefined | ReturnType<typeof setTimeout>,
     unreadMessages: number,
@@ -90,6 +91,7 @@ interface AppState {
 export const appState: AppState = reactive<AppState>({
     isChatOpen: false,
     isSimulateTyping: false,
+    isShowIntro: true,
     autoChat: undefined,
     auto404: undefined,
     unreadMessages: 0,

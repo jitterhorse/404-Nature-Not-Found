@@ -1,6 +1,9 @@
 <template>
   <div>
-    <initial-overlay404 :end="introEnded" />
+    <initial-overlay404
+      v-if="appState.isShowIntro"
+      :end="introEnded"
+    />
     <emscher-world />
     <nav>
       <primary-button :click="() => goScene(-1)">
@@ -69,6 +72,7 @@ watch(
 const introEnded = () => {
   startAutoChat()
   startAuto404()
+  appState.isShowIntro = false
 }
 </script>
 
